@@ -1,4 +1,9 @@
-.vscode
+android/
+ios/
+linux/
+macos/
+windows/
+.vscode/
 # Miscellaneous
 *.class
 *.log
