@@ -23,6 +23,8 @@ class CarState {
     required this.text,
     required this.frameId,
     required this.imageJpegB64,
+    required this.rawFrameId,
+    required this.rawImageJpegB64,
     required this.waypoints,
     required this.promptProcessing,
     required this.promptUuid,
@@ -34,6 +36,8 @@ class CarState {
   final String text;
   final String frameId;
   final String imageJpegB64;
+  final String rawFrameId;
+  final String rawImageJpegB64;
   final List<Waypoint> waypoints;
   final bool promptProcessing;
   final String? promptUuid;
@@ -48,6 +52,8 @@ class CarState {
       text: '',
       frameId: '',
       imageJpegB64: '',
+      rawFrameId: '',
+      rawImageJpegB64: '',
       waypoints: <Waypoint>[],
       promptProcessing: false,
       promptUuid: null,
@@ -63,6 +69,8 @@ class CarState {
       text: (json['text'] as String?) ?? '',
       frameId: (json['frame_id'] as String?) ?? '',
       imageJpegB64: (json['image_jpeg_b64'] as String?) ?? '',
+        rawFrameId: (json['raw_frame_id'] as String?) ?? '',
+        rawImageJpegB64: (json['raw_image_jpeg_b64'] as String?) ?? '',
       waypoints: waypointsJson
           .whereType<Map<String, dynamic>>()
           .map(Waypoint.fromJson)

@@ -289,7 +289,8 @@ class _CarDashboardPageState extends State<CarDashboardPage> {
   }
 
   Widget _buildImageCard(CarState state) {
-    final imageData = _decodeJpeg(state.imageJpegB64);
+    final processedImageData = _decodeJpeg(state.imageJpegB64);
+    final rawImageData = _decodeJpeg(state.rawImageJpegB64);
     return Container(
       decoration: _panelDecoration(),
       padding: const EdgeInsets.all(16),
@@ -297,38 +298,79 @@ class _CarDashboardPageState extends State<CarDashboardPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           const Text(
-            'Processed Camera Image',
+            'Camera Streams',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
           ),
-          const SizedBox(height: 8),
-          Text(
-            state.frameId.isEmpty ? 'frame_id: <empty>' : 'frame_id: ${state.frameId}',
-            style: const TextStyle(fontWeight: FontWeight.w600, color: Color(0xFF4E5964)),
-          ),
           const SizedBox(height: 12),
-          AspectRatio(
-            aspectRatio: 16 / 9,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(14),
-              child: ColoredBox(
-                color: const Color(0xFF101A20),
-                child: imageData == null
-                    ? const Center(
-                        child: Text(
-                          'No image stream yet',
-                          style: TextStyle(color: Colors.white70, fontWeight: FontWeight.w600),
-                        ),
-                      )
-                    : Image.memory(
-                        imageData,
-                        fit: BoxFit.cover,
-                        gaplessPlayback: true,
-                      ),
-              ),
+          Expanded(
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: _buildCameraStreamPane(
+                    title: 'Processed',
+                    frameId: state.frameId,
+                    imageData: processedImageData,
+                    emptyHint: 'No processed stream yet',
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: _buildCameraStreamPane(
+                    title: 'Raw',
+                    frameId: state.rawFrameId,
+                    imageData: rawImageData,
+                    emptyHint: 'No raw stream yet',
+                  ),
+                ),
+              ],
             ),
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildCameraStreamPane({
+    required String title,
+    required String frameId,
+    required Uint8List? imageData,
+    required String emptyHint,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          title,
+          style: const TextStyle(fontWeight: FontWeight.w700, color: Color(0xFF24323B)),
+        ),
+        const SizedBox(height: 6),
+        Text(
+          frameId.isEmpty ? 'frame_id: <empty>' : 'frame_id: $frameId',
+          style: const TextStyle(fontWeight: FontWeight.w600, color: Color(0xFF4E5964), fontSize: 12),
+        ),
+        const SizedBox(height: 8),
+        Expanded(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(14),
+            child: ColoredBox(
+              color: const Color(0xFF101A20),
+              child: imageData == null
+                  ? Center(
+                      child: Text(
+                        emptyHint,
+                        style: const TextStyle(color: Colors.white70, fontWeight: FontWeight.w600),
+                      ),
+                    )
+                  : Image.memory(
+                      imageData,
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      gaplessPlayback: true,
+                    ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
