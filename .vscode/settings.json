@@ -1,0 +1,19 @@
+{
+    "ROS2.distro": "humble",
+    "python.autoComplete.extraPaths": [
+        "/home/apollo/disk/ros2/install/mpc_planner/lib/python3.10/site-packages",
+        "/home/apollo/disk/ros2/install/hunter_msgs/lib/python3.10/site-packages",
+        "/home/apollo/disk/ros2/install/car/lib/python3.10/site-packages",
+        "/home/apollo/disk/ros2/install/all_launcher/lib/python3.10/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/apollo/disk/ros2/install/mpc_planner/lib/python3.10/site-packages",
+        "/home/apollo/disk/ros2/install/hunter_msgs/lib/python3.10/site-packages",
+        "/home/apollo/disk/ros2/install/car/lib/python3.10/site-packages",
+        "/home/apollo/disk/ros2/install/all_launcher/lib/python3.10/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ]
+}
