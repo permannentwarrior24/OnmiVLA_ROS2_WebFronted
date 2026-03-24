@@ -35,7 +35,7 @@ class _WaypointPlotState extends State<WaypointPlot> {
   static const double _minX = -3.0;
   static const double _maxX = 3.0;
   static const double _minY = 0.0;
-  static const double _maxY = 3.0;
+  static const double _maxY = 6.0;
 
   int? _selectedIndex;
 
@@ -183,12 +183,12 @@ class _WaypointPlotPainter extends CustomPainter {
       ..color = const Color(0xFFD8E1E8)
       ..strokeWidth = 1;
 
-    for (var x = -3; x <= 3; x++) {
+    for (var x = minX.ceil(); x <= maxX.floor(); x++) {
       final px = _toOffset(size, x.toDouble(), 0).dx;
       canvas.drawLine(Offset(px, 0), Offset(px, size.height), gridPaint);
     }
 
-    for (var y = 0; y <= 3; y++) {
+    for (var y = minY.ceil(); y <= maxY.floor(); y++) {
       final py = _toOffset(size, 0, y.toDouble()).dy;
       canvas.drawLine(Offset(0, py), Offset(size.width, py), gridPaint);
     }
@@ -242,12 +242,12 @@ class _WaypointPlotPainter extends CustomPainter {
       fontWeight: FontWeight.w600,
     );
 
-    for (var x = -3; x <= 3; x++) {
+    for (var x = minX.ceil(); x <= maxX.floor(); x++) {
       final offset = _toOffset(size, x.toDouble(), 0);
       _drawText(canvas, '$x', offset + const Offset(-8, 4), style);
     }
 
-    for (var y = 0; y <= 3; y++) {
+    for (var y = minY.ceil(); y <= maxY.floor(); y++) {
       final offset = _toOffset(size, 0, y.toDouble());
       _drawText(canvas, '$y', offset + const Offset(5, -8), style);
     }

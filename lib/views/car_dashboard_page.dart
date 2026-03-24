@@ -303,7 +303,7 @@ class _CarDashboardPageState extends State<CarDashboardPage> {
           ),
           const SizedBox(height: 12),
           Expanded(
-            child: Row(
+            child: Column(
               children: <Widget>[
                 Expanded(
                   child: _buildCameraStreamPane(
@@ -313,7 +313,7 @@ class _CarDashboardPageState extends State<CarDashboardPage> {
                     emptyHint: 'No processed stream yet',
                   ),
                 ),
-                const SizedBox(width: 12),
+                const SizedBox(height: 12),
                 Expanded(
                   child: _buildCameraStreamPane(
                     title: 'Raw',
