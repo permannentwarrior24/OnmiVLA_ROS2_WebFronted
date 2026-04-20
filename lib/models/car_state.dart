@@ -31,6 +31,7 @@ class CarState {
     required this.promptCompleteTime,
     required this.pendingPromptsCount,
     required this.promptDispatchMode,
+    required this.depthDescription,
   });
 
   final String text;
@@ -44,6 +45,7 @@ class CarState {
   final double? promptCompleteTime;
   final int pendingPromptsCount;
   final String promptDispatchMode;
+  final String depthDescription;
 
   bool get hasImage => imageJpegB64.isNotEmpty;
 
@@ -60,6 +62,7 @@ class CarState {
       promptCompleteTime: null,
       pendingPromptsCount: 0,
       promptDispatchMode: 'single',
+      depthDescription: '',
     );
   }
 
@@ -82,6 +85,7 @@ class CarState {
       promptCompleteTime: (json['prompt_complete_time'] as num?)?.toDouble(),
       pendingPromptsCount: (json['pending_prompts_count'] as num?)?.toInt() ?? 0,
       promptDispatchMode: ((json['prompt_dispatch_mode'] as String?) ?? 'single').trim(),
+      depthDescription: (json['depth_description'] as String?) ?? '',
     );
   }
 }

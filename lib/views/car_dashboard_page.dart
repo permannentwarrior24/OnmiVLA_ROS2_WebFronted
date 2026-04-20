@@ -82,6 +82,8 @@ class _CarDashboardPageState extends State<CarDashboardPage> {
                                     const SizedBox(height: 12),
                                     SizedBox(height: 320, child: _buildWaypointCard(vm)),
                                     const SizedBox(height: 12),
+                                    SizedBox(height: 100, child: _buildDepthDescriptionCard(vm.state)),
+                                    const SizedBox(height: 12),
                                     SizedBox(height: 300, child: _buildPromptHistoryCard(vm)),
                                   ],
                                 );
@@ -96,7 +98,13 @@ class _CarDashboardPageState extends State<CarDashboardPage> {
                                   const SizedBox(width: 14),
                                   Expanded(
                                     flex: 3,
-                                    child: _buildPromptHistoryCard(vm),
+                                    child: Column(
+                                      children: <Widget>[
+                                        SizedBox(height: 100, child: _buildDepthDescriptionCard(vm.state)),
+                                        const SizedBox(height: 12),
+                                        Expanded(child: _buildPromptHistoryCard(vm)),
+                                      ],
+                                    ),
                                   ),
                                 ],
                               );
@@ -325,6 +333,38 @@ class _CarDashboardPageState extends State<CarDashboardPage> {
               ],
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDepthDescriptionCard(CarState state) {
+    return Container(
+      width: double.infinity,
+      decoration: _panelDecoration(),
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          const Text(
+            'Depth Perception',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+          ),
+          const SizedBox(height: 12),
+          if (state.depthDescription.isEmpty)
+            const Text(
+              'No depth description available.',
+              style: TextStyle(color: Color(0xFF54626D), fontWeight: FontWeight.w600),
+            )
+          else
+            Text(
+              state.depthDescription,
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                color: Color(0xFF1D2A33),
+              ),
+            ),
         ],
       ),
     );
