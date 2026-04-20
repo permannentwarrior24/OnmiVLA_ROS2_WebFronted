@@ -82,7 +82,7 @@ class _CarDashboardPageState extends State<CarDashboardPage> {
                                     const SizedBox(height: 12),
                                     SizedBox(height: 320, child: _buildWaypointCard(vm)),
                                     const SizedBox(height: 12),
-                                    SizedBox(height: 100, child: _buildDepthDescriptionCard(vm.state)),
+                                    _buildDepthDescriptionCard(vm.state),
                                     const SizedBox(height: 12),
                                     SizedBox(height: 300, child: _buildPromptHistoryCard(vm)),
                                   ],
@@ -100,7 +100,7 @@ class _CarDashboardPageState extends State<CarDashboardPage> {
                                     flex: 3,
                                     child: Column(
                                       children: <Widget>[
-                                        SizedBox(height: 100, child: _buildDepthDescriptionCard(vm.state)),
+                                        _buildDepthDescriptionCard(vm.state),
                                         const SizedBox(height: 12),
                                         Expanded(child: _buildPromptHistoryCard(vm)),
                                       ],
